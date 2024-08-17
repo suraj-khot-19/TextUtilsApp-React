@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-export default function Textarea() {
+export default function Textarea(props) {
 
     const [text, setText] = useState("");
     const [alert, setAlert] = useState("");
@@ -45,12 +45,13 @@ export default function Textarea() {
         setText(newText);
         handelAlert("Text is Cleared");
     }
+    let btnColor=props.theme==='light'?'dark':'light';
     return (
         <>
-            <div style={{ height: '50px' }}>
+            <div className='container my-3' style={{ height: '50px' }}>
                 {
-                    alert.length !== 0 && <div>
-                        <div className="alert alert-warning alert-dismissible fade show" role="alert">
+                    alert.length === 0 ? <h2 className='text-center'> TextUtils Is Fun</h2> : <div>
+                        <div className="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{alert}</strong>
                         </div>
                     </div>
@@ -61,19 +62,20 @@ export default function Textarea() {
             </div>
             <div className="container my-3">
                 <div className="mb-3">
-                    <textarea value={text} onChange={handleOnChange} className="form-control" id="TextformId" rows="6"></textarea>
+                    <textarea placeholder='Enter text here...' style={props.theme === 'light' ? { backgroundColor: '#aaaacf', fontWeight: 'bold' } : { backgroundColor: 'grey', fontWeight: 'bold' }} value={text} onChange={handleOnChange} className="form-control" id="TextformId" rows="8"></textarea>
                 </div>
             </div>
             <div className="container my-5">
-                <button disabled={text.length === 0} type="button" onClick={handleUpperCase} className="btn btn-outline-primary mx-3">Convert To Upper Case</button>
-                <button disabled={text.length === 0} type="button" onClick={handleLowerCase} className="btn btn-outline-primary mx-3">Convert To Lower Case</button>
-                <button disabled={text.length === 0} type="button" onClick={handleRemoveExtraSpace} className="btn btn-outline-primary mx-3">Remove Extra Space</button>
-                <button disabled={text.length === 0} type="button" onClick={handleCopy} className="btn btn-outline-primary mx-3">Copy To Clipboard</button>
-                <button disabled={text.length === 0} type="button" onClick={handleClearText} className="btn btn-outline-primary mx-3">Clear Text</button>
+    
+                <button disabled={text.length === 0} type="button" onClick={handleUpperCase} className={`btn btn-outline-${btnColor} mx-3 my-2`}>Convert To Upper Case</button>
+                <button disabled={text.length === 0} type="button" onClick={handleLowerCase} className={`btn btn-outline-${btnColor} mx-3 my-2`}>Convert To Lower Case</button>
+                <button disabled={text.length === 0} type="button" onClick={handleRemoveExtraSpace} className={`btn btn-outline-${btnColor} mx-3 my-2`}>Remove Extra Space</button>
+                <button disabled={text.length === 0} type="button" onClick={handleCopy} className={`btn btn-outline-${btnColor} mx-3 my-2`}>Copy To Clipboard</button>
+                <button disabled={text.length === 0} type="button" onClick={handleClearText} className={`btn btn-outline-${btnColor} mx-3 my-2`}>Clear Text</button>
             </div>
             <div className="container my-3">
                 <h4>Preview</h4>
-                <h5>{text.split(/\s+/).filter((e) => { return e.length !== 0 }).length} Words {text.trim().length} Characters</h5>
+                <h6>{text.split(/\s+/).filter((e) => { return e.length !== 0 }).length} Words {text.trim().length} Characters</h6>
                 <p>
                     {text.length === 0 ? "Enter Text To Preview!" : text}
                 </p>
