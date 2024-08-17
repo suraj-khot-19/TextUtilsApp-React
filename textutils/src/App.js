@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './Components/Navbar'
 import Textarea from './Components/Textarea'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import About from './Components/About'
 import { useState } from 'react'
 
@@ -20,14 +20,18 @@ export default function App() {
     }
   }
   return (
+    // <>
+    //   <Router>
+    //     <Navbar changeMode={mode} theme={theme}/>
+    //     <Routes>
+    //       <Route path='/' element={<Textarea theme={theme}/>} />
+    //       <Route path='/about' element={<About />} />
+    //     </Routes>
+    //   </Router>
+    // </> 
     <>
-      <Router>
         <Navbar changeMode={mode} theme={theme}/>
-        <Routes>
-          <Route path='/' element={<Textarea theme={theme}/>} />
-          <Route path='/about' element={<About />} />
-        </Routes>
-      </Router>
+        <Textarea theme={theme}/>
     </>
   )
 }
